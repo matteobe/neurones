@@ -1,38 +1,56 @@
 {
   "name": "Sensible",
   "version": "1.0",
+  "manifest_version": 3,
   "description": "Identifies and remove harmful content from text on websites.",
   "author": "TUM.ai Hackathon - Team Neurones",
   "background": {
-    "service_worker": [
-      "background.js"
-    ],
-    "persistent": true
+    "service_worker": "background.js"
   },
-  "permissions": [
-    "https://*/*",
-    "http://*/*",
-    "contextMenus",
-    "storage",
-    "tabs",
-    "declarativeContent",
-    "activeTab"
-  ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html",
-    "default_icon": "icon.png"
+    "default_title": "Sensible - Avoid hate-speech",
+    "default_icon": {
+      "16": "/images/icon-16x16.png",
+      "32": "/images/icon-32x32.png",
+      "48": "/images/icon-48x48.png",
+      "128": "/images/icon-128x128.png"
+    }
   },
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
   "content_scripts": [
     {
+      "js": ["content.js"],
       "matches": [
         "http://*/*",
         "https://*/*"
-      ],
-      "js": [
-        "content.js"
       ]
     }
   ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ajax.googleapis.com; object-src 'self'",
-  "manifest_version": 2
+  "commands": {
+    "toggle-redaction": {
+      "description": "Switch between rewritten / redacted and labelled version of the text.",
+      "suggested_key": {
+        "default": "Command+Alt+R",
+        "mac": "Command+Alt+R"
+      }
+    }
+  },
+  "icons": {
+      "16": "/images/icon-16x16.png",
+      "32": "/images/icon-32x32.png",
+      "48": "/images/icon-48x48.png",
+      "128": "/images/icon-128x128.png"
+  }
 }
