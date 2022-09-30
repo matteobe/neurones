@@ -1,0 +1,38 @@
+{
+  "name": "Sensible",
+  "version": "1.0",
+  "description": "Identifies and remove harmful content from text on websites.",
+  "author": "TUM.ai Hackathon - Team Neurones",
+  "background": {
+    "service_worker": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "declarativeContent",
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ajax.googleapis.com; object-src 'self'",
+  "manifest_version": 2
+}
