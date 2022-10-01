@@ -35,7 +35,7 @@
       "all_frames": true,
       "run_at": "document_idle",
       "js": ["js/content.js"],
-      "css": ["css/labels.css"]
+      "css": ["css/overlays.css"]
     }
   ],
   "commands": {
