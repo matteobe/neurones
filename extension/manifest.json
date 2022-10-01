@@ -5,10 +5,10 @@
   "description": "Identifies and remove harmful content from text on websites.",
   "author": "TUM.ai Hackathon - Team Neurones",
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "js/background.js"
   },
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "html/popup.html",
     "default_title": "Sensible - Avoid hate-speech",
     "default_icon": {
       "16": "/images/icon-16x16.png",
@@ -17,7 +17,7 @@
       "128": "/images/icon-128x128.png"
     }
   },
-  "options_page": "options.html",
+  "options_page": "html/options.html",
   "permissions": [
     "storage",
     "activeTab",
@@ -33,18 +33,15 @@
     {
       "matches": ["*://*/*"],
       "all_frames": true,
-      "run_at": "document_end",
-      "js": ["content.js"],
+      "run_at": "document_idle",
+      "js": ["js/content.js"],
       "css": ["css/labels.css"]
     }
   ],
   "commands": {
     "toggle-redaction": {
       "description": "Switch between rewritten / redacted and labelled version of the text.",
-      "suggested_key": {
-        "default": "Command+Alt+R",
-        "mac": "Command+Alt+R"
-      }
+      "suggested_key": "Ctrl+Shift+R"
     }
   },
   "icons": {
