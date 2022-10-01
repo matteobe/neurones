@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/popup.css">
-    <script src="js/popup.js"></script>
+    <script defer src="js/popup.js"></script>
 </head>
 
 <body class="body_popup">
@@ -13,9 +13,18 @@
             <img class="icon" src="images/settings.png" alt="Settings">
         </a>
     </div>
-    <div class="header_tabs">
-        test
+    <div class="nav">
+        <div class="nav_element nav_element_selected">CURRENT</div>
+        <div class="nav_element">OVERVIEW</div>
+        <div class="nav_element horizontal_spacer"></div>
     </div>
-    Test of app
+    <div class="content">
+        <div id="CURRENT" class="page" style="visibility:visible">
+            Current info
+        </div>
+        <div id="OVERVIEW" class="page">
+            Overview info
+        </div>
+    </div>
 </body>
 </html>

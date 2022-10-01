@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="css/popup.css">
     <link rel="stylesheet" href="css/overlays.css">
-    <script src="js/popup.js"></script>
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/options.css">
+    <script defer src="js/options.js"></script>
 </head>
 
-<body class="body_popup">
-    <div class="header">
-        Test
-    </div>
+<body>
+<div class="header">
+    <img class="icon" src="images/logo.png" alt="Logo">
+    <div class="title">SensibleSpeech</div>
+</div>
+<div class="content">
+    <form id="optionsForm" class="options">
+        <label for="background_color">Background color:</label>
+        <input type="color" name="background_color" id="background_color">
+
+        <label for="text_color">Text color: </label>
+        <input type="color" name="text_color" id="text_color">
+    </form>
+</div>
 </body>
 </html>
