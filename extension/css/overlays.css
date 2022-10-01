@@ -1,0 +1,27 @@
+:root {
+    --color-dark: #0F95CC;
+    --color-light: #C9E9F6;
+}
+
+.hatespeech {
+    color: var(--color-dark);
+    display: inline-block;
+}
+
+.hatespeech-overlay {
+    background-color: var(--color-light);
+    border-style: none solid;
+    border-width: 2px;
+    border-color: var(--color-dark);
+    padding: 0 3px;
+    margin: 0 3px;
+}
+
+.hatespeech-category {
+    align-content: center;
+}
+
+.hatespeech-label {
+    vertical-align: top;
+    font-size: 10px;
+}
