@@ -25,15 +25,30 @@ chrome.tabs.onActivated.addListener(updateExtensionBadge);
 
 
 // Tab update
-// TODO: Code that parses the text for labelling
 async function newPageLoad(tabId, changeInfo, tab) {
     console.log("Tab updated")
+    console.log(tab.id)
     console.log(changeInfo.status)
 
     // When tab updating complete trigger parsing of text and badge update
-    if (changeInfo.status === "complete") {
+    if (tab.status === "complete") {
+        // Inject the content script
+        await chrome.scripting.executeScript({
+            target: {tabId: tab.id},
+            files: ['js/content.js']
+        });
+
+        // Update the badge number
         let value = Math.floor(Math.random() * 50).toString()
         chrome.action.setBadgeText({text: value}).then();
     }
 }
 chrome.tabs.onUpdated.addListener(newPageLoad);
+
+// Setting change
+chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'sync' && changes.options?.newValue) {
+        const debugMode = Boolean(changes.options.newValue.debug);
+        console.log('Enable debug mode?', debugMode);
+    }
+});
