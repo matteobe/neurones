@@ -1,5 +1,5 @@
 {
-  "name": "Sensible",
+  "name": "SensibleSpeech",
   "version": "1.0",
   "manifest_version": 3,
   "description": "Identifies and remove harmful content from text on websites.",
@@ -8,8 +8,8 @@
     "service_worker": "js/background.js"
   },
   "action": {
-    "default_popup": "html/popup.html",
-    "default_title": "Sensible - Avoid hate-speech",
+    "default_popup": "popup.html",
+    "default_title": "SensibleSpeech",
     "default_icon": {
       "16": "/images/icon-16x16.png",
       "32": "/images/icon-32x32.png",
@@ -17,13 +17,13 @@
       "128": "/images/icon-128x128.png"
     }
   },
-  "options_page": "html/options.html",
+  "options_page": "options.html",
   "permissions": [
-    "storage",
-    "activeTab",
+    "contextMenus",
     "scripting",
     "tabs",
-    "contextMenus"
+    "activeTab",
+    "storage"
   ],
   "host_permissions": [
     "http://*/*",
