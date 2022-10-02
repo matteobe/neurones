@@ -30,16 +30,15 @@ for (let i = 0; i < elements.length; i++) {
 // ------------------------------------- CONTENT ------------------------------------- //
 // Retrieve current tab id
 function getCurrentTabId() {
-    return chrome.tabs.query({active: true, currentWindow: true})
-        .then((tabs) => {
-            return tabs[0].id;
-        });
+    let queryOptions = {active: true, lastFocusedWindow: true};
+    let tab = chrome.tabs.query(queryOptions).then((tab) => {return tab;});
+    return tab.id;
 }
 
 // Display current content information
 function displayCurrentContent() {
     let currentTabId = getCurrentTabId();
-    chrome.message.sendMessage(currentTabId, {'tab_id': currentTabId});
+    chrome.tabs.sendMessage(currentTabId, {'tab_id': currentTabId}).then();
     console.log("Display for current tab-id: ", currentTabId);
     let currentData = chrome.storage.local.get([currentTabId])
         .then((data) => {return data[currentTabId]})

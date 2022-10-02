@@ -34,6 +34,10 @@ function newPageLoad(tabId, changeInfo, tab) {
 
         // Inject the content script
         console.log("Start script execution on tab", tab.id)
+        if (tab.url.startsWith("chrome-extension://", 0)) {
+            return 1;
+        }
+
         chrome.scripting.executeScript({
             target: {tabId: tab.id},
             files: ['js/content.js']
@@ -43,6 +47,7 @@ function newPageLoad(tabId, changeInfo, tab) {
         // Update the badge number
         let value = Math.floor(Math.random() * 50).toString();
         chrome.action.setBadgeText({text: value}).then();
+        return 0;
     }
 }
 chrome.tabs.onUpdated.addListener(newPageLoad);
