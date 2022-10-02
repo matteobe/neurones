@@ -23,7 +23,8 @@
     "scripting",
     "tabs",
     "activeTab",
-    "storage"
+    "storage",
+    "management"
   ],
   "host_permissions": [
     "*://*/*"
