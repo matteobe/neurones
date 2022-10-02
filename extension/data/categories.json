@@ -1,0 +1,74 @@
+{
+  "categories": [
+    {
+      "sentiment": [
+        "strongly negative",
+        "somewhat negative",
+        "neutral",
+        "somewhat positive",
+        "strongly positive"
+      ],
+      "respect": [
+        "strongly disrespectful",
+        "disrespectful",
+        "neutral",
+        "respectful",
+        "strongly respectful"
+      ],
+      "insult": [
+        "strongly disagree",
+        "disagree",
+        "neither disagree not agree",
+        "agree",
+        "strongly agree"
+      ],
+      "humiliate": [
+        "strongly disagree",
+        "disagree",
+        "neither disagree not agree",
+        "agree",
+        "strongly agree"
+      ],
+      "status": [
+        "strongly inferior",
+        "inferior",
+        "neither superior not inferior",
+        "superior",
+        "strongly superior"
+      ],
+      "dehumanize": [
+        "strongly disagree",
+        "disagree",
+        "neither disagree nor agree",
+        "agree",
+        "strongly agree"
+      ],
+      "violence": [
+        "strongly disagree",
+        "disagree",
+        "neither disagree nor agree",
+        "agree",
+        "strongly agree"
+      ],
+      "genocide": [
+        "strongly disagree",
+        "disagree",
+        "neither disagree nor agree",
+        "agree",
+        "strongly agree"
+      ],
+      "attack-defend": [
+        "strongly defending",
+        "defending",
+        "neither defending nor attacking",
+        "attacking",
+        "strongly attacking"
+      ],
+      "hate speech": [
+        "yes",
+        "no",
+        "unclear"
+      ]
+    }
+  ]
+}

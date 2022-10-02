@@ -25,27 +25,34 @@ chrome.tabs.onActivated.addListener(updateExtensionBadge);
 
 
 // Tab update
-async function newPageLoad(tabId, changeInfo, tab) {
-    console.log("Tab updated")
-    console.log(tab.id)
-    console.log(changeInfo.status)
-
+function newPageLoad(tabId, changeInfo, tab) {
     // When tab updating complete trigger parsing of text and badge update
     if (tab.status === "complete") {
+        // Log tab
+        console.log("Tab update complete", tab.id)
+        console.log(changeInfo.status)
+
         // Inject the content script
-        await chrome.scripting.executeScript({
+        console.log("Start script execution on tab", tab.id)
+        if (tab.url.startsWith("chrome-extension://", 0)) {
+            return 1;
+        }
+
+        chrome.scripting.executeScript({
             target: {tabId: tab.id},
             files: ['js/content.js']
-        });
+        }).then();
+        console.log("End script execution on tab", tab.id)
 
         // Update the badge number
-        let value = Math.floor(Math.random() * 50).toString()
+        let value = Math.floor(Math.random() * 50).toString();
         chrome.action.setBadgeText({text: value}).then();
+        return 0;
     }
 }
 chrome.tabs.onUpdated.addListener(newPageLoad);
 
-// Setting change
+// Setting change (DUMMY)
 chrome.storage.onChanged.addListener((changes, area) => {
     if (area === 'sync' && changes.options?.newValue) {
         const debugMode = Boolean(changes.options.newValue.debug);
