@@ -24,10 +24,13 @@ async function eventHandler(){
     
     console.log("sending message")
     chrome.runtime.sendMessage(postSentenceList, function(badIndices) {
-        console.log("welcome to callback hell", badIndices)
+        console.log(badIndices)
         postSentenceList.map((v,i)=> {
-            for(const sentenceIdx of badIndices[i]) {
-                elementList[i].innerText = elementList[i].innerText.replaceAll(postSentenceList[i][sentenceIdx], "[hate speech redacted]")
+            const offensiveSentenceIndices = badIndices[i]
+            for(const sentenceIdx of offensiveSentenceIndices) {
+                console.log(elementList[i].innerText, i,v.sentences[sentenceIdx])
+                elementList[i].innerHTML = elementList[i].innerHTML.replaceAll(v.sentences[sentenceIdx], 
+                `[Hate speech]<span style="color:red;background-color:red;">${v.sentences[sentenceIdx]}</span>`)
             }
         })
       });
