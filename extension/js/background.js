@@ -2,7 +2,6 @@
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log("message received in background")
         fetch('http://20.51.233.111', {
             method: "POST",
             body: JSON.stringify(request)
