@@ -1,15 +1,4 @@
 // Installation setup
-
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        fetch('http://20.51.233.111', {
-            method: "POST",
-            body: JSON.stringify(request)
-        }).then(res=>res.json()).then(sendResponse);
-        return true;
-    }
-)
-
 chrome.runtime.onInstalled.addListener((details) => {
     // Setup badge colors
     chrome.action.setBadgeBackgroundColor({ color: "#296B86" }).then();
@@ -37,6 +26,9 @@ chrome.tabs.onActivated.addListener(updateExtensionBadge);
 
 // Tab update
 function newPageLoad(tabId, changeInfo, tab) {
+    // Log
+    console.log("Tab loaded", tab.id)
+
     // When tab updating complete trigger parsing of text and badge update
     if (tab.status === "complete") {
         // Log tab
@@ -70,3 +62,16 @@ chrome.storage.onChanged.addListener((changes, area) => {
         console.log('Enable debug mode?', debugMode);
     }
 });
+
+// Text parser
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        console.log("Text parser called up.", request);
+        fetch('http://20.51.233.111', {
+            method: "POST",
+            body: JSON.stringify(request)
+        }).then(res=>res.json()).then(sendResponse);
+        return true;
+    }
+)
