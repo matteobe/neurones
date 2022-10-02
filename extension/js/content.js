@@ -1,22 +1,19 @@
-// Page parsing and API request happening here...
-// TODO: Page parsing
+'use strict';
 
-// Retrieve this tab id
-function getCurrentTabId() {
-    return chrome.tabs.query({active: true, currentWindow: true})
-        .then((tabs) => {return tabs[0].id})
-}
+// Store page data in cache
+let pageData = {};
 
-let thisTabId = getCurrentTabId();
-chrome.storage.local.set({thisTabId: {'value': 'test'}}).then()
+// Add page data information
+pageData['Hate'] = 10;
+pageData['Racism'] = 0;
 
-
+// Listen to messages with tabId
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log(sender.tab ?
-            "from a content script:" + sender.tab.url :
-            "from the extension");
-        if (request.greeting === "hello")
-            sendResponse({farewell: "goodbye"});
+        let currentTabId = request.tab_id;
+        chrome.storage.local.set({[currentTabId]: pageData}).then();
+        console.log("Content script for tab-id:", currentTabId);
+        console.log("Stored data", pageData);
     }
-);
+)
+

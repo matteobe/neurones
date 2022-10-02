@@ -1,8 +1,5 @@
 'use strict';
 
-// Load the hate speech categories
-import categories from '../data/categories.json' assert {type: 'json'};
-
 // ------------------------------------- NAVIGATION ------------------------------------- //
 // Navigation tab selection
 function selectNavElement() {
@@ -34,18 +31,21 @@ for (let i = 0; i < elements.length; i++) {
 // Retrieve current tab id
 function getCurrentTabId() {
     return chrome.tabs.query({active: true, currentWindow: true})
-        .then((tabs) => {return tabs[0].id})
+        .then((tabs) => {
+            return tabs[0].id;
+        });
 }
-
-// Send message to current tab for information
-chrome.tabs.sendMessage(getCurrentTabId(), {'msg': 'update'}).then()
 
 // Display current content information
-function updateCurrentContent(sender) {
-    document.getElementById("CURRENT").innerText = sender.tab.id.toString();
+function displayCurrentContent() {
+    let currentTabId = getCurrentTabId();
+    chrome.message.sendMessage(currentTabId, {'tab_id': currentTabId});
+    console.log("Display for current tab-id: ", currentTabId);
+    let currentData = chrome.storage.local.get([currentTabId])
+        .then((data) => {return data[currentTabId]})
+
+    console.log("Current data", currentData);
+    document.getElementById("CURRENT").innerText = 'Hate';
 }
 
-// Send message to current tab for information
-chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-    chrome.tabs.sendMessage(tabs[0].id, {'msg': 'test'}).then();
-});
+displayCurrentContent();

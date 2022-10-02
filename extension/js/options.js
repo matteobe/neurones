@@ -1,7 +1,10 @@
 'use strict';
 
 // Specify the default options and local cache
-import default_options from '../data/options.json' assert {type: 'json'};
+const default_options = {
+    "background_color": "#C9E9F6",
+    "text_color": "#0F95CC"
+};
 const options = {};
 
 // Initialize the form with the user options (if available, otherwise use default options)
