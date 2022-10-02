@@ -1,32 +1,45 @@
 // Page parsing and API request happening here...
 // TODO: Page parsing
-const myRe = /^\d+$/;
 
+console.log("v3")
 
-
-function eventHandler(){
-    a = document.querySelectorAll('.css-901oao.css-16my406.r-poiln3.r-bcqeeo')
+async function eventHandler(){
+    elementList = document.querySelectorAll('div.css-901oao.r-1nao33i.r-37j5jr.r-a023e6.r-16dba41.r-rjixqe.r-bcqeeo.r-bnwqim.r-qvutc0')
     elemInfo = []
-    for(const element of a){
-        if (myRe.test(element.innerText)) {
+    for(const element of elementList){
+        if (/^\d+/.test(element.innerText)) {//if the text starts with digits
             continue
         }
         else {
-            return elemInfo = (element)
+            elemInfo.push(element)
         }
-        
     }
+
+    const postSentenceList = elemInfo.map(e=>{
+        return {
+            sentences: e.innerText.split(". ")
+        }
+    })
+
+    
+    const res = await fetch('https://20.51.233.111', {
+        method: "POST",
+        body: JSON.stringify(postSentenceList)
+    })
+
+    console.log(res)
+
+    const res_text = await res.text()
+
+    consonle.log(res_text)
+
+    postSentenceList.map((v,i)=> {
+        for(const sentenceIdx of badIndices[i]) {
+            elementList[i].innerText = elementList[i].innerText.replaceAll(postSentenceList[i][sentenceIdx], "[hate speech redacted]")
+        }
+    })
 }
 
 setTimeout(eventHandler, 5000)
 
 info = eventHandler()
-
-fetch(), {
-    method: 'POST',
-    body: JSON.stringify(elemInfo)
-    .then(function(response)) {
-        
-    }
-    
-}
