@@ -1,4 +1,16 @@
 // Installation setup
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        console.log("message received in background")
+        fetch('http://20.51.233.111', {
+            method: "POST",
+            body: JSON.stringify(request)
+        }).then(res=>res.json()).then(sendResponse);
+        return true;
+    }
+)
+
 chrome.runtime.onInstalled.addListener((details) => {
     // Setup badge colors
     chrome.action.setBadgeBackgroundColor({ color: "#296B86" }).then();
