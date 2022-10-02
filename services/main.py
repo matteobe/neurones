@@ -1,8 +1,10 @@
+# the code for the transformer is adapted from this tutorial: https://www.youtube.com/watch?v=jti2sPQYzeQ
+# run this file with `sudo -E python3 main.py`.
+
 from happytransformer import HappyTextClassification
 from http.server import BaseHTTPRequestHandler, HTTPServer  # imported to have an http endpoint
 import json
 from typing import Union
-# the code for the transformer is adapted from this tutorial: https://www.youtube.com/watch?v=jti2sPQYzeQ
 
 happy_tc = HappyTextClassification("BERT", "Hate-speech-CNERG/dehatebert-mono-english", 2)
 
@@ -35,7 +37,7 @@ class handler(BaseHTTPRequestHandler):
 
         for post in req_body:
             sentences: list[str] = post["sentences"]
-
+            print(sentences)
             bad_indices = []
 
             for i, sentence in enumerate(sentences):
@@ -49,4 +51,4 @@ class handler(BaseHTTPRequestHandler):
         )
 
 
-HTTPServer(("",80),handler).handle_request()
+HTTPServer(("",80),handler).serve_forever()
